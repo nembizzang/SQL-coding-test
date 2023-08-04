@@ -1,4 +1,6 @@
-SELECT f.FLAVOR
-FROM first_half f, icecream_info i
-WHERE f.flavor = i.flavor AND f.total_order >= 3000 AND i.ingredient_type = 'fruit_based'
-ORDER BY total_order DESC
+SELECT fst.flavor
+    FROM first_half fst
+    LEFT OUTER JOIN icecream_info info
+                ON fst.flavor = info.flavor
+    WHERE fst.total_order > 3000 AND info.ingredient_type = 'fruit_based'
+    ORDER BY fst.total_order DESC;
