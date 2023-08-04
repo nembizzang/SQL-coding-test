@@ -1,5 +1,7 @@
-SELECT p.product_id, p.product_name, SUM(p.price*o.amount) TOTAL_SALES
-FROM food_product p, food_order o
-WHERE p.product_id = o.product_id AND DATE_FORMAT(o.produce_date,'%y%m') = '2205'
-GROUP BY product_id
-ORDER BY total_sales DESC, product_id
+SELECT prod.product_id, prod.product_name, SUM(prod.price*ord.amount) total_sales
+    FROM food_product prod
+    LEFT OUTER JOIN food_order ord
+                ON prod.product_id = ord.product_id
+    WHERE DATE_FORMAT(ord.produce_date, '%Y%m') = '202205'
+    GROUP BY prod.product_id
+    ORDER BY total_sales DESC, prod.product_id;
