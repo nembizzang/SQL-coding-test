@@ -1,12 +1,7 @@
-SELECT history.car_id CAR_ID
-       ,(CASE WHEN GROUP_CONCAT(DISTINCT(able.a)) LIKE '%대여중%' THEN '대여중'
-              ELSE '대여 가능'
-        END) AVAILABILITY
-    FROM car_rental_company_rental_history history
-    INNER JOIN (SELECT car_id, start_date, (CASE WHEN ('2022-10-16' BETWEEN start_date AND end_date) THEN '대여중'
-                        ELSE '대여 가능'
-                        END) a
-                  FROM car_rental_company_rental_history) able
-            ON history.car_id = able.car_id AND history.start_date = able.start_date
-    GROUP BY history.car_id
+SELECT DISTINCT(car_id) CAR_ID
+       , IF(car_id IN (SELECT car_id
+                         FROM car_rental_company_rental_history
+                        WHERE '2022-10-16' BETWEEN start_date and end_date),
+            '대여중','대여 가능') AVAILABILITY
+    FROM car_rental_company_rental_history
     ORDER BY CAR_ID DESC;
