@@ -1,9 +1,20 @@
-SELECT a_d.apnt_no, p.pt_name, p.pt_no, a_d.mcdp_cd, a_d.dr_name, a_d.apnt_ymd
-FROM patient p
-JOIN (SELECT d.dr_name, d.dr_id, d.mcdp_cd, a.apnt_ymd, a.apnt_no, a.pt_no, a.apnt_cncl_yn
-      FROM doctor d
-      JOIN appointment a
-      ON d.dr_id = a.mddr_id AND d.mcdp_cd = a.mcdp_cd) a_d
-ON p.pt_no = a_d.pt_no
-WHERE DATE_FORMAT(apnt_ymd, '%y-%m-%d')='22-04-13' AND apnt_cncl_yn = 'N' AND mcdp_cd = 'CS'
-ORDER BY apnt_ymd
+# JOIN KEY : p.pt_no = a.pt_no / a.mddr_id = d.dr_id AND a.mcdp_cd = d.mcdp_cd
+# 문제 조건
+# 1) 2022-04-13 : a.apnt_ymd LIKE '2022-04-13%'
+# 2) 취소되지않은 : a.apnt_cncl_yn = 'N'
+# 3) 흉부외과(CS) : a.mcdp_cd = 'CS'
+# 4) 출력 : a.apnt_no 진료예약번호, p.pt_name 환자이름, p.pt_no 환자번호,
+#          a.mcdp_cd 진료과코드, d.dr_name 의사이름, a.apnt_ymd 진료예약일시
+SELECT ad.apnt_no 진료예약번호, p.pt_name 환자이름, p.pt_no 환자번호,
+       ad.mcdp_cd 진료과코드, ad.dr_name 의사이름, ad.apnt_ymd 진료예약일시
+  FROM patient p
+  INNER JOIN (SELECT a.apnt_ymd, a.apnt_no, a.pt_no, a.mcdp_cd, a.mddr_id,
+                     a.apnt_cncl_yn, a.apnt_cncl_ymd, d.dr_name
+                FROM appointment a
+                INNER JOIN doctor d
+                        ON a.mddr_id = d.dr_id AND a.mcdp_cd = d.mcdp_cd) ad
+          ON p.pt_no = ad.pt_no
+  WHERE ad.apnt_ymd LIKE '2022-04-13%' AND
+        ad.apnt_cncl_yn = 'N' AND
+        ad.mcdp_cd = 'CS'
+  ORDER BY 진료예약일시;
