@@ -3,8 +3,7 @@ SELECT history.car_id CAR_ID
               ELSE '대여 가능'
         END) AVAILABILITY
     FROM car_rental_company_rental_history history
-    INNER JOIN (SELECT car_id, start_date, (CASE WHEN ('2022-10-16' >= start_date
-                                   AND '2022-10-16' <= end_date) THEN '대여중'
+    INNER JOIN (SELECT car_id, start_date, (CASE WHEN ('2022-10-16' BETWEEN start_date AND end_date) THEN '대여중'
                         ELSE '대여 가능'
                         END) a
                   FROM car_rental_company_rental_history) able
