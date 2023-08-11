@@ -1,5 +1,5 @@
-SELECT sales_date, product_id, IFNULL(user_id,NULL) user_id, sales_amount
-    FROM (SELECT DATE_FORMAT(sales_date,'%Y-%m-%d') sales_date, product_id, user_id, sales_amount
+SELECT DATE_FORMAT(sales_date,'%Y-%m-%d'), product_id, IFNULL(user_id,NULL) user_id, sales_amount
+    FROM (SELECT sales_date, product_id, user_id, sales_amount
             FROM online_sale
           UNION
           SELECT sales_date, product_id, NULL, sales_amount
