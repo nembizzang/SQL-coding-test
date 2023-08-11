@@ -1,4 +1,4 @@
-SELECT p.member_name, r.review_text REVIEW_TEXT, DATE_FORMAT(r.review_date,'%Y-%m-%d') REVIEW_DATE
+SELECT p.member_name, r.review_text, DATE_FORMAT(r.review_date,'%Y-%m-%d')
     FROM member_profile p
     INNER JOIN rest_review r
             ON p.member_id = r.member_id
@@ -9,4 +9,4 @@ SELECT p.member_name, r.review_text REVIEW_TEXT, DATE_FORMAT(r.review_date,'%Y-%
                                                          FROM (SELECT COUNT(member_id) cnt
                                                                  FROM rest_review
                                                                  GROUP BY member_id) a))
-    ORDER BY REVIEW_DATE, REVIEW_TEXT;
+    ORDER BY review_date, review_text;
