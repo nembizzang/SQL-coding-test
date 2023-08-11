@@ -1,18 +1,23 @@
-# 2021년에 가입하고 상품을 구매한 회원리스트
-# SELECT COUNT(DISTINCT u.user_id)
-# FROM user_info u
-# JOIN online_sale o
-# ON o.user_id = u.user_id
-# WHERE u.user_id IN (SELECT user_id FROM user_info WHERE YEAR(joined)='2021')
-
-
-SELECT YEAR(sales_date) YEAR, MONTH(sales_date) MONTH, COUNT(DISTINCT u.user_id) PUCHASED_USERS,
-        ROUND(COUNT(DISTINCT u.user_id)/(SELECT COUNT(DISTINCT user_id)
-                                        FROM user_info
-                                        WHERE user_id IN (SELECT user_id FROM user_info WHERE YEAR(joined)='2021')),1) PUCHASED_RATIO
-FROM user_info u
-JOIN online_sale o
-ON u.user_id = o.user_id
-WHERE u.user_id IN (SELECT user_id FROM user_info WHERE YEAR(joined)='2021')
-GROUP BY YEAR, MONTH
-ORDER BY YEAR, MONTH
+SELECT YEAR(sale.sales_date) year
+        , MONTH(sale.sales_date) month
+        , COUNT(DISTINCT sale.user_id) purchased_users
+        , ROUND(COUNT(DISTINCT sale.user_id)/(SELECT COUNT(*)
+                                                FROM user_info
+                                                WHERE YEAR(joined) = '2021'),1) purchased_ratio
+    FROM user_info info
+    INNER JOIN online_sale sale
+            ON info.user_id = sale.user_id
+    WHERE YEAR(info.joined) = '2021'
+    GROUP BY year, month
+    ORDER BY year, month;
+    
+    
+#     SELECT YEAR(sales_date),
+#     MONTH(sales_date), 
+#     count(DISTINCT O.USER_ID), 
+#     ROUND(count(DISTINCT O.USER_ID)/(SELECT COUNT(USER_ID) FROM USER_INFO WHERE YEAR(JOINED) = 2021),1)
+# FROM ONLINE_SALE O
+# INNER JOIN USER_INFO U ON U.USER_ID = O.USER_ID
+# WHERE YEAR(JOINED) = 2021
+# GROUP BY 1,2
+# ORDER BY 1,2
