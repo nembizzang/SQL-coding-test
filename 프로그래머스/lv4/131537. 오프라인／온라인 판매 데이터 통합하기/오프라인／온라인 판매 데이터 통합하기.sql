@@ -1,11 +1,8 @@
-SELECT DATE_FORMAT(sales_date,'%Y-%m-%d') SALES_DATE, PRODUCT_ID, USER_ID, SALES_AMOUNT
-FROM 
-(SELECT SALES_DATE, PRODUCT_ID, NULL USER_ID, SUM(sales_amount) SALES_AMOUNT
-FROM offline_sale
-GROUP BY sales_date, product_id
-UNION
-SELECT SALES_DATE, PRODUCT_ID, USER_ID, SUM(sales_amount) SALES_AMOUNT
-FROM online_sale
-GROUP BY sales_date, product_id, user_id) m
-WHERE DATE_FORMAT(SALES_DATE,'%y%m') = '2203'
-ORDER BY sales_date, product_id, user_id
+SELECT sales_date, product_id, IFNULL(user_id,NULL) user_id, sales_amount
+    FROM (SELECT DATE_FORMAT(sales_date,'%Y-%m-%d') sales_date, product_id, user_id, sales_amount
+            FROM online_sale
+          UNION
+          SELECT sales_date, product_id, NULL, sales_amount
+            FROM offline_sale) a
+    WHERE sales_date LIKE '2022-03%'
+    ORDER BY sales_date, product_id, user_id;
