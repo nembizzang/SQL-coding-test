@@ -1,13 +1,9 @@
-WITH RECURSIVE tmp AS (
-SELECT 0 hour
-UNION ALL
-SELECT hour+1 FROM tmp WHERE hour < 23)
-
-SELECT t.hour HOUR, IFNULL(h.count,0) COUNT
-FROM tmp t
-LEFT JOIN (SELECT HOUR(datetime) hour, COUNT(animal_id) count
-FROM animal_outs
-GROUP BY hour) h
-ON t.hour = h.hour
-GROUP BY HOUR
-ORDER BY HOUR
+# set 함수 이용
+SET @HOUR := -1; # 초기 변수 설정
+SELECT (@HOUR := @HOUR+1) HOUR, # HOUR 변수에 +1 반복
+        (SELECT COUNT(*)
+            FROM animal_outs
+            WHERE HOUR(datetime) = @HOUR) COUNT
+    FROM animal_outs
+    WHERE @HOUR < 23 # 마지막으로 +1한 HOUR가 23이면 반복 멈춤
+    ORDER BY HOUR;
