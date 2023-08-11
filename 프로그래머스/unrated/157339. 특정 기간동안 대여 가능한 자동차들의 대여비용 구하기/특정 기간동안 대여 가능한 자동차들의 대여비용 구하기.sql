@@ -11,10 +11,11 @@ SELECT f.car_id, f.car_type, ROUND(30*f.daily_fee*(100-discount_rate)/100) fee
                                 GROUP BY car_id
                                 HAVING COUNT(car_id) = SUM((CASE WHEN end_date < '2022-11-01' OR start_date > '2022-11-30' THEN 1
                                                                  ELSE 0
-                                                            END)))
-                 AND car_type IN ('세단','SUV')) f
+                                                            END))
+                             )
+           ) f
     INNER JOIN car_rental_company_discount_plan d
             ON f.car_type = d.car_type
-    WHERE d.duration_type = '30일 이상'
+    WHERE d.duration_type = '30일 이상' AND f.car_type IN ('세단','SUV')
     HAVING fee BETWEEN 500000 AND 2000000
     ORDER BY fee DESC, car_type, car_id DESC;
