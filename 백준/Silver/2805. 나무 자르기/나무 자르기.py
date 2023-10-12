@@ -10,7 +10,7 @@ def solution(m,trees):
     while left<(left+right)//2 :
         mid = (left+right)//2 # 중간
         # 설정 높이가 mid일때 가져가는 나무 길이 tmp_m
-        tmp_m = sum(map(lambda x : x-mid if x>mid else 0, trees))
+        tmp_m = sum([tree-mid if tree>mid else 0 for tree in trees])
         if tmp_m >= m : # 나무 길이가 m이상일때
             left = mid
         else : # 나무 길이가 m미만일때
