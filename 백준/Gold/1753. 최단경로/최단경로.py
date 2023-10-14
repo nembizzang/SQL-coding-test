@@ -8,7 +8,6 @@
             - 최단 경로라면 도착 노드까지 최단 경로 업데이트 및 큐에 추가
 2. 정답 출력 : 정점별 최단경로 출력
 '''
-from collections import defaultdict
 from heapq import heappop, heappush
 input = open(0).readline
 
@@ -33,8 +32,8 @@ def solution(sta): # 시작 노드로부터 다익스트라 bfs 진행
 if __name__ == '__main__':
     v,e = map(int,input().split()) # 정점 개수, 간선 개수
     k = int(input())
-    path = defaultdict(list) # 출발 노드 : [[도착 노드, 가중치]]
-    for _ in range(e): # path 추가
+    path = [[] for _ in range(v+1)] # 노드의 인덱스에 [이웃 노드, 가중치] 모두 포함
+    for i in range(e): # path 추가
         sta,end,w = map(int,input().split())
         path[sta].append([end,w])
     inf = float('inf')
