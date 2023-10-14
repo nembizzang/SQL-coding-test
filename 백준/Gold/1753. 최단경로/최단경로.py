@@ -31,7 +31,8 @@ if __name__ == '__main__':
     for _ in range(e): # path 추가
         sta,end,w = map(int,input().split())
         path[sta].append([end,w])
-    short_cut = {i:float('inf') for i in range(1,v+1)} # 각 노드까지 최단경로 저장할 dictionary
+    inf = float('inf')
+    short_cut = {i:inf for i in range(1,v+1)} # 각 노드까지 최단경로 저장할 dictionary
     solution(k) # 시작점부터 bfs 시작
     for i in range(1,v+1):
         print(short_cut[i] if short_cut[i] != float('inf') else 'INF')
