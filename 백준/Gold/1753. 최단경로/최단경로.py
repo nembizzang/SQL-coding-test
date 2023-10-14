@@ -18,6 +18,8 @@ def solution(sta): # 시작 노드로부터 다익스트라 bfs 진행
     heappush(queue,[0,sta]) # 확인할 노드를 담는 queue에 [최단 경로(0),출발노드] 담기
     while queue :
         cur_dist,cur_node = heappop(queue) # queue에서 현재 최단 경로와 확인할 노드 뽑기
+        if short_cut[cur_node] < cur_dist : # cur_node의 현재 최단 경로가 현재의 경로보다 짧다면
+            continue # 확인할 필요없이 다음 노드 확인 진행
         for new_node,dist in path[cur_node] : # 현재 노드에서 간선으로 이어진 노드와 경로
             if short_cut[new_node] > cur_dist+dist : # new_node의 현재 최단 경로가 cur_node를 거쳐간 경로 보다 크다면
                 short_cut[new_node] = cur_dist+dist # 최단 경로 갱신
