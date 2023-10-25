@@ -9,6 +9,7 @@
             if 합의 절대값이 min_sum보다 작다 :
                 min_sum, ans 두 용액으로 초기화
             if 합이 음수면 left+1, 양수면 right-1
+4. while문 종료 후 ans 출력
 '''
 input = open(0).readline
 def solution():
