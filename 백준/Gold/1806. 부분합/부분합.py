@@ -19,8 +19,6 @@ def solution():
         return 0
     left=right=0 # 투 포인터 초기화
     min_len,cnt = n+1, nums[0] # 최소 길이, 현재 합 초기화
-    if cnt >= s:
-        return 1
     while True :
         if cnt < s : # 현재 합이 s미만이라면
             if right == n-1 : # 만약 끝에 도달했는데도 합이 s미만이라면
