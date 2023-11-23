@@ -1,5 +1,4 @@
-import sys
-input = sys.stdin.readline
+input = open(0).readline
 
 def main():
     V = int(input())
