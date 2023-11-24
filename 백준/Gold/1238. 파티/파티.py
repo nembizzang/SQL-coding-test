@@ -1,6 +1,6 @@
 '''
 1. x로 가는 경로 구하기
-   다른 노드에서 x로 가는 경로를 구할 때는 간선 정보의 출발, 도착을 거꾸로 입력받는다.
+   입력받는 간선 정보의 출발, 도착을 거꾸로 입력받는다.
    이를 통해 x에서 각 노드간의 거리를 한번의 다익스트라로 구하여 리스트 형태로 저장
 2. x에서 돌아오는 경로 구하기
    x 노드부터 출발하여 각 노드까지 가는 거리를 다익스트라로 구하여 리스트 형태로 저장
@@ -22,7 +22,7 @@ def solution():
     def dikstra(graph):
         inf = float('inf')
         short_cut = [inf]*(n+1)
-        short_cut[0] = short_cut[x] = 0 # 0노드(안씀)와 x노드 = 0
+        short_cut[x] = 0 # x노드 = 0
         queue = [(0,x)]
         heapify(queue) # 경로,도착노드
         while queue:
@@ -38,7 +38,7 @@ def solution():
     # x로 갈때, 올때 최단거리 구하기
     to_go, comeback = dikstra(go_graph), dikstra(come_graph)
     ans = 0
-    for go,come in zip(to_go[1:],comeback[1:]):
+    for go,come in zip(to_go[1:],comeback[1:]): # 0번 노드 제외
         ans = max(ans,go+come)
     return ans
 
