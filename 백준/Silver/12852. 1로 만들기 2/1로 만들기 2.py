@@ -1,30 +1,20 @@
-'''
-1. 수 별로 도착 가능한 최소 연산 수와 경로를 담아두는 리스트를 만든다.(dp)
-    dp = [[0,[]] for _ in range(n+1)]
-2. 2부터 n까지 반복하며 세가지 연산 중 최솟값으로 넣어준다.(i)
-   i가 2와 3으로 나누어 떨어지는 경우를 각각의 조건문으로 확인하자.
-   dp[i] = [역연산 숫자까지 도달 연산 횟수+1, [i+역연산 숫자 도달 경로]] 
-   +1 연산의 경우 : dp[i] = [dp[i-1][0]+1,i+dp[i-1][1]] : i-1 도달 연산 횟수, i+도달 연산 경로
-   *2 연산의 경우 : dp[i] = [dp[i//2][0]+1,i+dp[i//2][1]]
-   *3 연산의 경우 : dp[i] = [dp[i//3][0]+1,i+dp[i//3][1]]
-3. dp[n]까지 완료 후 출력
-'''
-input = open(0).readline
+import sys
+input = sys.stdin.readline
 
-def solution():
-    n = int(input())
-    dp = [0]*(n+1) # dp[i]에 바로 리스트 형태로 초기화 해줄 것이라서 원소는 0으로 지정
-    dp[1] = [0,[1]]
-    for i in range(2,n+1):
-        # +1 연산
-        dp[i] = [dp[i-1][0]+1,[i]+dp[i-1][1]]
-        # *3 연산
-        if not i%3 and dp[i//3][0]+1 < dp[i][0] :
-            dp[i] = [dp[i//3][0]+1,[i]+dp[i//3][1]]
-        # *2 연산
-        if not i%2 and dp[i//2][0]+1 < dp[i][0] : # 2로 나눠지고, 현재 횟수보다 빨리 도달하면
-            dp[i] = [dp[i//2][0]+1,[i]+dp[i//2][1]]
-    print(dp[n][0])
-    print(*dp[n][1])
-if __name__ == '__main__':
-    solution()
+n = int(input())
+dp = [[0, []] for _ in range(n + 1)]
+dp[1][0] = 0
+dp[1][1] = [1]
+
+for i in range(2, n + 1):
+    dp[i][0] = dp[i-1][0] + 1
+    dp[i][1] = dp[i-1][1] + [i]
+    if i % 3 == 0 and dp[i // 3][0] + 1 < dp[i][0]:
+        dp[i][0] = dp[i // 3][0] + 1
+        dp[i][1] = dp[i // 3][1] + [i]
+    if i % 2 == 0 and dp[i // 2][0] + 1 < dp[i][0]:
+        dp[i][0] = dp[i // 2][0] + 1
+        dp[i][1] = dp[i // 2][1] + [i]
+
+print(dp[n][0])
+print(*reversed(dp[n][1]))
