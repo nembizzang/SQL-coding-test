@@ -16,16 +16,16 @@ def solution():
         print(n, end=' ') # 먼저 n을 출력
         if n-1 in dp and dp[n-1] == dp[n]-1 : # -1 연산으로 진행한 적이 있고 최단 연산 경로라면
             n -= 1
-        elif n//3 in dp and dp[n//3] + n%3 == dp[n]-1 : # /3 연산으로 진행한 적이 있고 최단 연산 경로라면
-            for _ in range(n%3) : # 나머지만큼 반복
-                n -= 1 # 1빼고
-                print(n, end = ' ') # 출력
-            n //= 3 # 나누기 3 
-        else : # /2 연산으로 진행한 적이 있고 최단 연산 경로라면
+        elif n//2 in dp and dp[n//2] + n%2 == dp[n]-1 : # /3 연산으로 진행한 적이 있고 최단 연산 경로라면
             for _ in range(n%2) : # 나머지만큼 반복
                 n -= 1 # 1빼고
                 print(n, end = ' ') # 출력
             n //= 2 # 나누기 2
+        else : # /3 연산으로 진행한 적이 있고 최단 연산 경로라면
+            for _ in range(n%3) : # 나머지만큼 반복
+                n -= 1 # 1빼고
+                print(n, end = ' ') # 출력
+            n //= 3 # 나누기 3
     print(1) # 최종 도달지점인 1 출력
 if __name__ == '__main__':
     solution()
