@@ -6,15 +6,13 @@ bfs로 1번부터 자식노드로 내려가면서 각 자식노드에 대한 부
 n : 노드개수
 tree = {node:[자식노드]}
 parents = [0]*(노드개수+1)
-visited = {node:방문여부}
 
 2) bfs
 stack = deque([1])
 while stack :
     노드를 하나씩 꺼내서
     그 노드와 이어진 자식 노드를 하나씩 확인
-    node에 방문한 적이 없다면
-    visited에 방문 체크
+    parents[자식 노드]=0이라면
     parents[자식노드]=부모노드로 초기화해주고 자식 노드를 stack에 넣어준다.
 
 3) 결과 출력
@@ -37,9 +35,8 @@ def solution():
     while stack :
         p_node = stack.popleft()
         for c_node in tree[p_node]:
-            if visited[c_node]: # node에 방문한 적이 있다면 통과
+            if parents[c_node]: # node에 방문한 적이 있다면 통과
                 continue
-            visited[c_node] = 1
             parents[c_node] = p_node
             stack.append(c_node)
     # 결과 출력
