@@ -7,25 +7,28 @@
 '''
 import sys
 sys.setrecursionlimit(10 ** 9)
-input = open(0).readline # 모든 줄을 한 번에 받을 것이기에 readlines
+input = open(0).readlines # 모든 줄을 한 번에 받을 것이기에 readlines
 
 def solution():
-    tree = []
-    while True:
-        try:
-            tree.append(int(input()))
-        except:
-            break
+    tree = list(map(int,input())) # 입력값을 담아둘 list
 
     def postord(root_idx,end_idx) :
-        if root_idx > end_idx : # 노드가 50, 30처럼 루트/왼쪽 노드 만 있을 경우 대비
-            return
         root = tree[root_idx]
-        right_idx = root_idx+1 # 오른쪽 노드 시작은 루트 노드 다음 인덱스부터 가능
-        for i in range(right_idx, end_idx+1) :
+        if root_idx >= end_idx : # 마지막 노드에 다다랐다면
+            print(root) # 루트 출력 후
+            return # 한 단계 이전 재귀함수로 복귀
+        
+        if root > tree[end_idx] or root < tree[root_idx+1] : # 왼노드나 오른노드만 있을 경우
+            postord(root_idx+1,end_idx) # 둘 중 하나만 진행
+            print(root) # 루트 출력
+            return
+        
+        right_idx = 0
+        for i in range(root_idx+1, end_idx+1) : # 오른쪽 노드 시작은 루트 노드 다음 인덱스부터 가능
             if tree[i] > root : # 오른쪽 노드의 시작은 루트보다 처음으로 큰 수
                 right_idx = i
                 break
+        
         postord(root_idx+1, right_idx-1) # 왼쪽 노드 재귀 진행
         postord(right_idx,end_idx) # 오른쪽 노드 재귀 진행
         print(root) # 루트 노드 출력
