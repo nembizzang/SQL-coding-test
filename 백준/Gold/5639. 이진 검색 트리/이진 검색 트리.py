@@ -14,7 +14,7 @@ def solution():
 
     def postord(root_idx,end_idx) :
         root = tree[root_idx]
-        if root_idx >= end_idx : # 마지막 노드에 다다랐다면
+        if root_idx == end_idx : # 마지막 노드에 다다랐다면
             print(root) # 루트 출력 후
             return # 한 단계 이전 재귀함수로 복귀
         
