@@ -7,10 +7,15 @@
 '''
 import sys
 sys.setrecursionlimit(10 ** 9)
-input = open(0).readlines # 모든 줄을 한 번에 받을 것이기에 readlines
+input = open(0).readline # 모든 줄을 한 번에 받을 것이기에 readlines
 
 def solution():
-    tree = list(map(int,input())) # 입력값을 담아둘 list
+    tree = []
+    while True:
+        try:
+            tree.append(int(input()))
+        except:
+            break
 
     def postord(root_idx,end_idx) :
         if root_idx > end_idx : # 노드가 50, 30처럼 루트/왼쪽 노드 만 있을 경우 대비
