@@ -1,8 +1,7 @@
 '''
-union-find 유형의 문제에서 parents는 list 형태로 만들었으나,
-이번에는 입력값이 문자열이므로 숫자로 mapping 가능한 dictionary를 만든다.
-union과 find 함수를 만들어 매번 친구관계를 입력받을 때마다 매핑 후 union을 해주고,
-union 진행 후 Counter 객체로 친구 네트워크 수를 출력
+union-find 유형의 문제에서 parents는 list 형태로 만들었으나, 이번에는 입력값이 문자열이므로 dictionary 형태로 만든다.
+매번 친구 관계 입력값을 받을 때마다 Union을 실행하여 한 쪽으로 parents를 맞춰주고 상위 parents인 쪽에 친구의 수를 더해준다.
+* 수 형태에선 작은 값으로 부모를 맞춰주는게 시간 단축에 유리하나 안 맞춰주어도 무방하다. 어차피 find에서 부모를 끝까지 찾아간다.
 '''
 input = open(0).readline
 
@@ -25,8 +24,8 @@ def solution():
         a_name,b_name = input().split()
         for name in [a_name,b_name]:
             if name not in parents : # 처음 입력받는 이름이면
-                parents[name] = name # 처음
-                f_cnt[name] = 1 # 연결된 친구는 자기 자신 뿐
+                parents[name] = name # 부모에 자기 자신 넣어두기
+                f_cnt[name] = 1 # 연결된 친구의 수는 1(자기 자신 뿐)
         union(a_name,b_name)
 
 if __name__ == '__main__': 
