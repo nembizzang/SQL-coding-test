@@ -16,10 +16,7 @@ def solution():
     
     def union(a,b): # 두 도시 연결
         a,b = find(a), find(b) # a,b는 각 도시와 연결된 최소 번호의 도시로 초기화
-        if a < b : # a가 더 작으면
-            parents[b] = a
-        else : # b가 더 작으면
-            parents[a] = b
+        parents[b] = a
     
     n = int(input()) # 도시의 수
     m = int(input()) # 여행계획에 포함된 도시 수
