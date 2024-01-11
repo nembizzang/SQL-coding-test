@@ -1,24 +1,39 @@
-input = open(0).readline
+import sys
 
-def solution():
-    s = [0]*21 # 1부터 20까지의 정수를 연산하기 위함
-    for _ in range(int(input())):
-        ord = input().split()
-        if len(ord)==2 :
-            x = int(ord[1])
-        ord = ord[0]
-        if ord == 'add':
-            s[x] = 1
-        elif ord == 'remove':
-            s[x] = 0
-        elif ord == 'check':
-            print(1 if s[x] else 0)
-        elif ord == 'toggle':
-            s[x] = 0 if s[x] else 1
-        elif ord == 'all':
-            s = [1]*21
-        else :
-            s = [0]*21
-            
-if __name__ == '__main__':
-    solution()
+def solve():
+    read = sys.stdin.readline
+    m = int(read())
+    all_s = (1 << 21) - 1
+    s = 0
+    div = 600_000
+    for i in range(m // div):
+        for _ in range(div):
+            cmd = read().split()
+            if cmd[0] == 'add':
+                s |= (1 << int(cmd[1]))
+            elif cmd[0] == 'remove':
+                s &= ~(1 << int(cmd[1]))
+            elif cmd[0] == 'check':
+                print('1' if s & (1 << int(cmd[1])) else '0')
+            elif cmd[0] == 'toggle':
+                s ^= (1 << int(cmd[1]))
+            elif cmd[0] == 'all':
+                s = all_s
+            elif cmd[0] == 'empty':
+                s = 0
+    for _ in range(m % div):
+        cmd = read().split()
+        if cmd[0] == 'add':
+            s |= (1 << int(cmd[1]))
+        elif cmd[0] == 'remove':
+            s &= ~(1 << int(cmd[1]))
+        elif cmd[0] == 'check':
+            print('1' if s & (1 << int(cmd[1])) else '0')
+        elif cmd[0] == 'toggle':
+            s ^= (1 << int(cmd[1]))
+        elif cmd[0] == 'all':
+            s = all_s
+        elif cmd[0] == 'empty':
+            s = 0
+
+solve()
