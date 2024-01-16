@@ -14,6 +14,10 @@
 
 Empty
 
+### 제출 일자
+
+2023년 10월 0일 7:20:0
+
 ### 문제 설명
 
 <p>다음은 고객의 정보를 담은 <code>MEMBER_PROFILE</code>테이블과 식당의 리뷰 정보를 담은  <code>REST_REVIEW</code> 테이블입니다. <code>MEMBER_PROFILE</code> 테이블은 다음과 같으며 <code>MEMBER_ID</code>, <code>MEMBER_NAME</code>, <code>TLNO</code>, <code>GENDER</code>, <code>DATE_OF_BIRTH</code>는 회원 ID, 회원 이름, 회원 연락처, 성별, 생년월일을 의미합니다.</p>
@@ -228,4 +232,4 @@ Empty
 <p><code>REVIEW_DATE</code>의 데이트 포맷이 예시와 동일해야 정답처리 됩니다.</p>
 
 
-> 출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges
+> 출처: 프로그래머스 코딩 테스트 연습, https://school.programmers.co.kr/learn/challenges

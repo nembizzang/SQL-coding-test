@@ -14,6 +14,10 @@
 
 Empty
 
+### 제출 일자
+
+2023년 10월 6일 10:54:26
+
 ### 문제 설명
 
 <p>다음은 식품의 정보를 담은 <code>FOOD_PRODUCT</code> 테이블과 식품의 주문 정보를 담은 <code>FOOD_ORDER</code> 테이블입니다. <code>FOOD_PRODUCT</code> 테이블은 다음과 같으며 <code>PRODUCT_ID</code>, <code>PRODUCT_NAME</code>, <code>PRODUCT_CD</code>, <code>CATEGORY</code>, <code>PRICE</code>는 식품 ID, 식품 이름, 식품코드, 식품분류, 식품 가격을 의미합니다.</p>
@@ -279,4 +283,4 @@ Empty
 </tbody>
       </table>
 
-> 출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges
+> 출처: 프로그래머스 코딩 테스트 연습, https://school.programmers.co.kr/learn/challenges

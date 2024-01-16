@@ -14,6 +14,10 @@
 
 Empty
 
+### 제출 일자
+
+2023년 10월 6일 19:24:24
+
 ### 문제 설명
 
 <p><code>PLACES</code> 테이블은 공간 임대 서비스에 등록된 공간의 정보를 담은 테이블입니다. <code>PLACES</code> 테이블의 구조는 다음과 같으며 <code>ID</code>, <code>NAME</code>, <code>HOST_ID</code>는 각각 공간의 아이디, 이름, 공간을 소유한 유저의 아이디를 나타냅니다. <code>ID</code>는 기본키입니다.</p>
@@ -125,4 +129,4 @@ Empty
 </tbody>
       </table>
 
-> 출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges
+> 출처: 프로그래머스 코딩 테스트 연습, https://school.programmers.co.kr/learn/challenges

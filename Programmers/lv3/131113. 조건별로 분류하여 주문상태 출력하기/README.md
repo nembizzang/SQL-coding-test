@@ -14,6 +14,10 @@
 
 Empty
 
+### 제출 일자
+
+2023년 10월 5일 22:22:41
+
 ### 문제 설명
 
 <p>다음은 식품공장의 주문정보를 담은 <code>FOOD_ORDER</code> 테이블입니다. <code>FOOD_ORDER</code> 테이블은 다음과 같으며 <code>ORDER_ID</code>, <code>PRODUCT_ID</code>, <code>AMOUNT</code>, <code>PRODUCE_DATE</code>, <code>IN_DATE</code>,<code>OUT_DATE</code>,<code>FACTORY_ID</code>, <code>WAREHOUSE_ID</code>는 각각 주문 ID, 제품 ID, 주문양, 생산일자, 입고일자, 출고일자, 공장 ID, 창고 ID를 의미합니다.</p>
@@ -183,4 +187,4 @@ Empty
 </tbody>
       </table>
 
-> 출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges
+> 출처: 프로그래머스 코딩 테스트 연습, https://school.programmers.co.kr/learn/challenges
